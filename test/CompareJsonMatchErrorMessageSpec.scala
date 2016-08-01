@@ -21,29 +21,29 @@ class CompareJsonMatchErrorMessageSpec extends Specification with JsonMatcher {
 
   }
 
-  val jsonA = Json.parse(
-    """
-      {
-        "string_field" : "string",
-        "number_field" : 100,
-        "boolean_field" : false,
-        "null_field" : null,
-        "array_field" : ["string", 100, false, null],
-        "object_field" : {"xxx_field" : "xxx", "yyy_field" : 100}
-      }
-    """)
+val jsonA = Json.parse(
+  """
+    {
+      "string_field" : "string",
+      "number_field" : 100,
+      "boolean_field" : false,
+      "null_field" : null,
+      "array_field" : ["string", 100, false, null],
+      "object_field" : {"xxx_field" : "xxx", "yyy_field" : 100}
+    }
+  """)
 
-  // jsonAから、フィールドの順番を変えつつ、xxx_fieldの値を変えている
-  val jsonB = Json.parse(
-    """
-      {
-        "number_field" : 100,
-        "string_field" : "string",
-        "boolean_field" : false,
-        "null_field" : null,
-        "object_field" : {"xxx_field" : "zzz", "yyy_field" : 100},
-        "array_field" : ["string", 100, false, null]
-      }
-    """)
+// jsonAから、フィールドの順番を変えつつ、xxx_fieldの値を変えている
+val jsonB = Json.parse(
+  """
+    {
+      "number_field" : 100,
+      "string_field" : "string",
+      "boolean_field" : false,
+      "null_field" : null,
+      "object_field" : {"xxx_field" : "zzz", "yyy_field" : 100},
+      "array_field" : ["string", 100, false, null]
+    }
+  """)
 
 }

@@ -4,9 +4,8 @@ import org.specs2.matcher._
 import play.api.libs.json._
 
 /**
-  * Specs2用のHelperクラスです。Specクラスにて継承して使用します
+  * Json比較用のMatcherです
   *
-  * Json用のカスタムMatcherなどを提供します
   * Matcher変換用のimplicitを用意するために、MatchersImplicitsを継承しています
   */
 trait JsonMatcher extends MatchersImplicits {
@@ -15,7 +14,15 @@ trait JsonMatcher extends MatchersImplicits {
     * Jsonを比較するMatcherを生成します
     *
     * 使用例：
+    *
     * actual must equalToJsVal(expected)
+    *
+    *
+    * 比較ルール：
+    * - オブジェクト型のフィールドの順番が違っても、エラーにしない
+    * - 配列型の中身の順番が違った場合は、エラーにする
+    * - フィールドはフィールド名の昇順でソートする
+    * - 最初に見つかったエラーのみを表示する
     *
     * @param expected               期待値
     * @param useFullValueForMessage 比較対象値の全てをKOメッセージに含めるか否か
@@ -64,7 +71,7 @@ trait JsonMatcher extends MatchersImplicits {
              |${Json.prettyPrint(expectedSorted)}
              |-----
              |
-           |at""".stripMargin
+             |at""".stripMargin
           Some(x + detailMessage)
         } else {
           Some(x + "\n\nat")
